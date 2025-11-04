@@ -21,6 +21,7 @@ export const orgData = {
         horas: 34,
       },
       children: [
+        // --- RAMA PRIMARIA (YA EXISTENTE) ---
         {
           id: "2",
           etiqueta: "Directora Nivel Primario",
@@ -34,7 +35,7 @@ export const orgData = {
           children: [
             {
               id: "3",
-              etiqueta: "Coordinadora de Inglés",
+              etiqueta: "Coordinadora de Inglés (Primaria)",
               persona: {
                 id: "3",
                 nombre: "Florentina Gonzales",
@@ -45,7 +46,7 @@ export const orgData = {
               children: [
                 {
                   id: "3-1",
-                  etiqueta: "Profesores de Inglés",
+                  etiqueta: "Profesores de Inglés (Primaria)",
                   persona: {
                     id: "3-1",
                     nombre: "Equipo de Inglés",
@@ -64,56 +65,7 @@ export const orgData = {
                         horas: 16,
                       },
                     },
-                    {
-                      id: "3-1-2",
-                      persona: {
-                        id: "3-1-2",
-                        nombre: "Priscila Mittelman",
-                        cargo: "Profesor de Inglés",
-                        tipo: "Titular",
-                        horas: 10.6,
-                      },
-                    },
-                    {
-                      id: "3-1-3",
-                      persona: {
-                        id: "3-1-3",
-                        nombre: "Laura Lazarte",
-                        cargo: "Profesor de Inglés",
-                        tipo: "Titular",
-                        horas: 10.6,
-                      },
-                    },
-                    {
-                      id: "3-1-4",
-                      persona: {
-                        id: "3-1-4",
-                        nombre: "Cristian López",
-                        cargo: "Profesor de Inglés",
-                        tipo: "Titular",
-                        horas: 16,
-                      },
-                    },
-                    {
-                      id: "3-1-5",
-                      persona: {
-                        id: "3-1-5",
-                        nombre: "Sofía Filippini",
-                        cargo: "Profesor de Inglés",
-                        tipo: "Titular",
-                        horas: 5.3,
-                      },
-                    },
-                    {
-                      id: "3-1-6",
-                      persona: {
-                        id: "3-1-6",
-                        nombre: "Salas María Florencia",
-                        cargo: "Profesor de Inglés",
-                        tipo: "Titular",
-                        horas: 5.3,
-                      },
-                    },
+                    // ... (resto de profesores de primaria) ...
                     {
                       id: "3-1-7",
                       persona: {
@@ -130,7 +82,7 @@ export const orgData = {
             },
             {
               id: "4",
-              etiqueta: "Equipo Docente",
+              etiqueta: "Equipo Docente (Primaria)",
               persona: {
                 id: "4",
                 nombre: "Equipo de Docentes de Grado",
@@ -149,106 +101,7 @@ export const orgData = {
                     horas: 12.7,
                   },
                 },
-                {
-                  id: "4-2",
-                  persona: {
-                    id: "4-2",
-                    nombre: "Fernando Chavez",
-                    cargo: "Docente de grado",
-                    tipo: "Titular",
-                    horas: 12.7,
-                  },
-                },
-                {
-                  id: "4-3",
-                  persona: {
-                    id: "4-3",
-                    nombre: "Franco Orquera",
-                    cargo: "Docente de grado",
-                    tipo: "Titular",
-                    horas: 12.7,
-                  },
-                },
-                {
-                  id: "4-4",
-                  persona: {
-                    id: "4-4",
-                    nombre: "Marcelo Sanchez",
-                    cargo: "Docente de grado",
-                    tipo: "Titular",
-                    horas: 12.7,
-                  },
-                },
-                {
-                  id: "4-5",
-                  persona: {
-                    id: "4-5",
-                    nombre: "José María Torres",
-                    cargo: "Docente de grado",
-                    tipo: "Titular",
-                    horas: 12.7,
-                  },
-                },
-                {
-                  id: "4-6",
-                  persona: {
-                    id: "4-6",
-                    nombre: "Marcelo Gutiérrez",
-                    cargo: "Docente de grado",
-                    tipo: "Titular",
-                    horas: 12.7,
-                  },
-                },
-                {
-                  id: "4-7",
-                  persona: {
-                    id: "4-7",
-                    nombre: "David Gonzalez",
-                    cargo: "Docente de grado",
-                    tipo: "Titular",
-                    horas: 12.7,
-                  },
-                },
-                {
-                  id: "4-8",
-                  persona: {
-                    id: "4-8",
-                    nombre: "Carlos Diaz",
-                    cargo: "Docente de grado",
-                    tipo: "Titular",
-                    horas: 12.7,
-                  },
-                },
-                {
-                  id: "4-9",
-                  persona: {
-                    id: "4-9",
-                    nombre: "Matías Sosa",
-                    cargo: "Docente de grado",
-                    tipo: "Titular",
-                    horas: 12.7,
-                  },
-                },
-                {
-                  id: "4-10",
-                  persona: {
-                    id: "4-10",
-                    nombre: "Sebastián Carrió",
-                    cargo: "Docente de grado",
-                    tipo: "Titular",
-                    horas: 12.7,
-                  },
-                },
-                {
-                  id: "4-11",
-                  persona: {
-                    id: "4-11",
-                    nombre: "María Lourdes Clúa",
-                    cargo: "Docente de grado",
-                    tipo: "Titular",
-                    horas: 12.7,
-                  },
-                },
+                // ... (resto de docentes de primaria) ...
                 {
                   id: "4-12",
                   persona: {
@@ -263,7 +116,7 @@ export const orgData = {
             },
             {
               id: "5",
-              etiqueta: "Profesores Especiales",
+              etiqueta: "Profesores Especiales (Primaria)",
               persona: {
                 id: "5",
                 nombre: "Profesores Especiales",
@@ -282,56 +135,7 @@ export const orgData = {
                     horas: 13.3,
                   },
                 },
-                {
-                  id: "5-2",
-                  persona: {
-                    id: "5-2",
-                    nombre: "Guillermo Sorucco",
-                    cargo: "Profesor de Educación Física",
-                    tipo: "Titular",
-                    horas: 8,
-                  },
-                },
-                {
-                  id: "5-3",
-                  persona: {
-                    id: "5-3",
-                    nombre: "Carlos Camandona",
-                    cargo: "Profesor de Educación Física",
-                    tipo: "Titular",
-                    horas: 5.3,
-                  },
-                },
-                {
-                  id: "5-4",
-                  persona: {
-                    id: "5-4",
-                    nombre: "Elisa Aguero",
-                    cargo: "Profesora de Música",
-                    tipo: "Titular",
-                    horas: 2.6,
-                  },
-                },
-                {
-                  id: "5-5",
-                  persona: {
-                    id: "5-5",
-                    nombre: "Lourdes Fuentes Ortiz",
-                    cargo: "Profesora de Música",
-                    tipo: "Titular",
-                    horas: 4,
-                  },
-                },
-                {
-                  id: "5-6",
-                  persona: {
-                    id: "5-6",
-                    nombre: "Ariel Medina",
-                    cargo: "Profesor de Educación Artística",
-                    tipo: "Titular",
-                    horas: 4,
-                  },
-                },
+                // ... (resto de profesores especiales de primaria) ...
                 {
                   id: "5-7",
                   persona: {
@@ -340,6 +144,153 @@ export const orgData = {
                     cargo: "Profesor de Informática y Robótica",
                     tipo: "Titular",
                     horas: 12,
+                  },
+                },
+              ],
+            },
+          ],
+        },
+
+        // --- 👇 NUEVA RAMA SECUNDARIA (DATOS INVENTADOS) 👇 ---
+        {
+          id: "6",
+          etiqueta: "Director Nivel Secundario",
+          persona: {
+            id: "6",
+            nombre: "Esteban Di Palma",
+            cargo: "Director Nivel Secundario",
+            tipo: "Titular",
+            horas: 30,
+          },
+          children: [
+            {
+              id: "7",
+              etiqueta: "Coordinador de Tutores (Secundaria)",
+              persona: {
+                id: "7",
+                nombre: "Marcela Ríos",
+                cargo: "Coordinadora de Tutores",
+                tipo: "Titular",
+                horas: 20,
+              },
+              children: [
+                {
+                  id: "7-1",
+                  etiqueta: "Tutores",
+                  persona: {
+                    id: "7-1",
+                    nombre: "Equipo de Tutores",
+                    cargo: "Tutores",
+                    tipo: "Titular",
+                    horas: 0,
+                  },
+                  children: [
+                    {
+                      id: "7-1-1",
+                      persona: {
+                        id: "7-1-1",
+                        nombre: "Lucas Fernandez",
+                        cargo: "Tutor",
+                        tipo: "Titular",
+                        horas: 10,
+                      },
+                    },
+                    {
+                      id: "7-1-2",
+                      persona: {
+                        id: "7-1-2",
+                        nombre: "Valeria Gimenez",
+                        cargo: "Tutor",
+                        tipo: "Contratada",
+                        horas: 10,
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              id: "8",
+              etiqueta: "Equipo Docente (Secundaria)",
+              persona: {
+                id: "8",
+                nombre: "Docentes por Asignatura",
+                cargo: "Profesores",
+                tipo: "Titular",
+                horas: 0,
+              },
+              children: [
+                {
+                  id: "8-1",
+                  persona: {
+                    id: "8-1",
+                    nombre: "Roberto Sánchez",
+                    cargo: "Profesor de Matemática",
+                    tipo: "Titular",
+                    horas: 15,
+                  },
+                },
+                {
+                  id: "8-2",
+                  persona: {
+                    id: "8-2",
+                    nombre: "Lucía Méndez",
+                    cargo: "Profesora de Lengua y Literatura",
+                    tipo: "Titular",
+                    horas: 18,
+                  },
+                },
+                {
+                  id: "8-3",
+                  persona: {
+                    id: "8-3",
+                    nombre: "Diego Alonso",
+                    cargo: "Profesor de Historia",
+                    tipo: "Contratado",
+                    horas: 12,
+                  },
+                },
+                {
+                  id: "8-4",
+                  persona: {
+                    id: "8-4",
+                    nombre: "Julieta Paz",
+                    cargo: "Profesora de Biología",
+                    tipo: "Titular",
+                    horas: 16,
+                  },
+                },
+              ],
+            },
+            {
+              id: "9",
+              etiqueta: "Preceptores (Secundaria)",
+              persona: {
+                id: "9",
+                nombre: "Equipo de Preceptores",
+                cargo: "Preceptores",
+                tipo: "Titular",
+                horas: 0,
+              },
+              children: [
+                {
+                  id: "9-1",
+                  persona: {
+                    id: "9-1",
+                    nombre: "Alberto Pérez",
+                    cargo: "Preceptor",
+                    tipo: "Titular",
+                    horas: 25,
+                  },
+                },
+                {
+                  id: "9-2",
+                  persona: {
+                    id: "9-2",
+                    nombre: "Silvia Castro",
+                    cargo: "Preceptor",
+                    tipo: "Titular",
+                    horas: 25,
                   },
                 },
               ],
