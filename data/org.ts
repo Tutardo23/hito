@@ -13,7 +13,7 @@ export const orgData = {
   listaPersonas: [
     { id: "1", nombre: "Juan Manuel Romano", cargo: "Director General", tipo: "Titular", horas: 34 },
     
-    { id: "sec_6_37", nombre: "Veron Ponce Hernan", cargo: "Rector Nivel Secundario", tipo: "Titular", horas: 34.0 },
+    { id: "sec_6_37", nombre: "Hernan Ponce Veron", cargo: "Rector Nivel Secundario", tipo: "Titular", horas: 34.0 },
     
     { id: "sec_18_7", nombre: "Fernando Casiva", cargo: "Vice Rector-Profesor Lengua", tipo: "Titular", horas: 34.0 },
     { id: "p8", nombre: "Maria Eugenia Martin", cargo: "Recepción, Área Familia, Consejos de Dirección", tipo: "Titular", horas: 34 },
