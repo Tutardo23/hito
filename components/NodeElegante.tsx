@@ -33,8 +33,7 @@ type PersonaData = {
 const colorAzulPucara = "#1C3A62";
 const colorAmarilloPucara = "#ECC300";
 
-// --- COMPONENTE 1: Tarjeta de Jerarquía (Para Directores, etc.) ---
-// (Este componente no tiene cambios)
+// --- COMPONENTE 1: Tarjeta de Jerarquía ---
 const NodeCard = ({ data }: { data: PersonaData }) => {
   const bgColor = data.color;
   const headerTextColor =
@@ -88,20 +87,18 @@ const NodeCard = ({ data }: { data: PersonaData }) => {
   );
 };
 
-// --- 👇 COMPONENTE 2: "Bloque de Profesores" (NUEVO DISEÑO "PREMIUM") 👇 ---
+// --- COMPONENTE 2: "Bloque de Profesores" ---
 const NodeGridPremium = ({ data }: { data: PersonaData }) => {
   const bgColor = data.color;
   const headerTextColor =
     bgColor === colorAmarilloPucara ? "text-gray-900" : "text-white";
   
-  // Usamos el color Azul Pucará como color de borde para el grid
-  const gridBorderColor = "rgba(28, 58, 98, 0.2)"; // Azul Pucará con opacidad
+  const gridBorderColor = "rgba(28, 58, 98, 0.2)";
 
-  const gridNames = data.listaPersonas || [];
-  
-  // Función para obtener Nombre y Apellido en líneas separadas
-  const formatName = (fullName: string) => {
-    const parts = fullName.split(" ");
+  const formatName = (fullName: string | undefined | null) => {
+    const safeFullName = fullName || ''; 
+    const parts = safeFullName.split(" ");
+    
     const firstName = parts[0];
     const lastName = parts.length > 1 ? parts.slice(1).join(" ") : "";
     return (
@@ -112,17 +109,18 @@ const NodeGridPremium = ({ data }: { data: PersonaData }) => {
     );
   };
 
+  const gridNames = data.listaPersonas || [];
+  
   return (
     <div
       className="rounded-xl overflow-hidden"
       style={{ backgroundColor: bgColor }}
     >
-      {/* Header (Título del equipo) */}
+      {/* Header */}
       <div
         className={`p-4 text-left flex items-center ${headerTextColor}`}
         style={{ backgroundColor: bgColor }}
       >
-        {/* Usamos el logo aquí también para consistencia */}
         <div
           className="relative w-10 h-10 mr-3 rounded-full flex-shrink-0"
           style={{
@@ -146,7 +144,7 @@ const NodeGridPremium = ({ data }: { data: PersonaData }) => {
         </div>
       </div>
 
-      {/* Grid de Nombres "Premium" */}
+      {/* Grid de Nombres */}
       <div className="grid grid-cols-2 bg-white">
         {gridNames.map((persona, index) => (
           <div
@@ -158,15 +156,15 @@ const NodeGridPremium = ({ data }: { data: PersonaData }) => {
               borderLeft: index % 2 !== 0 ? `1px solid ${gridBorderColor}` : "none",
             }}
           >
-            {formatName(persona.nombre)}
+            {persona.nombre ? formatName(persona.nombre) : (
+                <span className="text-gray-500 text-xs">{persona.cargo || '-'}</span>
+            )} 
           </div>
         ))}
       </div>
     </div>
   );
 };
-// --- (Fin del nuevo diseño) ---
-
 
 // --- COMPONENTE PRINCIPAL (Decide cuál renderizar) ---
 export default function NodeElegante({ data }: { data: PersonaData }) {
@@ -204,46 +202,49 @@ export default function NodeElegante({ data }: { data: PersonaData }) {
                   min-w-[320px] max-w-[320px] 
                   transition-all duration-300 ${focusRing}`}
       style={{
-        width: 320, // Ancho fijo
+        width: 320,
       }}
     >
       {/* --- RENDERIZADO CONDICIONAL --- */}
-      {data.hasList ? (
+      {hasList ? (
         <NodeGridPremium data={data} />
       ) : (
         <NodeCard data={data} />
       )}
 
-      {/* --- Botón +/- (Solo si hay sub-nodos) --- */}
-      {hasChildren && (
-        <button
-          onClick={handleExpandClick}
-          className={`absolute -bottom-4 left-1/2 -translate-x-1/2
-                      w-8 h-8 rounded-full flex items-center justify-center
-                      text-white shadow-md transition-all duration-200`}
-          style={{ backgroundColor: color }}
-          aria-label={isExpanded ? "Colapsar" : "Expandir"}
-        >
-          {isExpanded ? <FaMinus size={12} /> : <FaPlus size={12} />}
-        </button>
-      )}
+      {/* --- 👇 BOTONES INFERIORES CON LÓGICA ANTI-SOLAPAMIENTO 👇 --- */}
+      <div className="absolute -bottom-4 left-0 right-0 flex justify-center gap-x-3">
+        {/* Botón +/- (Solo si hay sub-nodos) */}
+        {hasChildren && (
+          <button
+            onClick={handleExpandClick}
+            className={`w-8 h-8 rounded-full flex items-center justify-center
+                        text-white shadow-md transition-all duration-200`}
+            style={{ backgroundColor: color }}
+            aria-label={isExpanded ? "Colapsar" : "Expandir"}
+          >
+            {isExpanded ? <FaMinus size={12} /> : <FaPlus size={12} />}
+          </button>
+        )}
 
-      {/* --- Botón de Info (si hay lista de personas) --- */}
-      {hasList && (
-        <button
-          onClick={handleInfoClick}
-          className={`absolute -bottom-4 left-1/2 -translate-x-1/2
-                      w-8 h-8 rounded-full flex items-center justify-center
-                      shadow-md transition-all duration-200`}
-          style={{
-            backgroundColor: colorAmarilloPucara,
-            color: colorAzulPucara,
-          }}
-          aria-label="Ver equipo"
-        >
-          <FaUsers size={14} />
-        </button>
-      )}
+        {/* Botón de Info (si hay lista de personas) */}
+        {hasList && (
+          <button
+            onClick={handleInfoClick}
+            className={`w-8 h-8 rounded-full flex items-center justify-center
+                        shadow-md transition-all duration-200`}
+            style={{
+              backgroundColor: colorAmarilloPucara,
+              color: colorAzulPucara,
+            }}
+            aria-label="Ver equipo"
+          >
+            <FaUsers size={14} />
+          </button>
+        )}
+      </div>
+      {/* --- (Fin del cambio) --- */}
+
 
       {/* --- Handles Arriba/Abajo --- */}
       <Handle

@@ -9,6 +9,15 @@ export const orgData = {
     tipo: "Titular",
     horas: 0,
   },
+  // --- LISTA DE PERSONAS AÑADIDA AL CONSEJO ---
+  listaPersonas: [
+    { id: "1", nombre: "Juan Manuel Romano", cargo: "Director General", tipo: "Titular", horas: 34 },
+    { id: "2", nombre: "Adriana Lozano", cargo: "Directora Nivel Primario", tipo: "Titular", horas: 31 },
+    { id: "sec_6_37", nombre: "Veron Ponce Hernan", cargo: "Rector Nivel Secundario", tipo: "Titular", horas: 34.0 },
+    { id: "3", nombre: "Florentina Gonzales", cargo: "Coordinadora Gral. de Inglés", tipo: "Contratada", horas: 34 },
+    { id: "sec_18_7", nombre: "Casiva Fernando", cargo: "Vice Rector-Profesor Lengua", tipo: "Titular", horas: 34.0 },
+    { id: "p8", nombre: "Maria Eugenia Martin", cargo: "Recepción, Área Familia, Consejos de Dirección", tipo: "Titular", horas: 34 },
+  ],
   children: [
     {
       id: "1",
@@ -33,39 +42,6 @@ export const orgData = {
             horas: 31,
           },
           children: [
-            {
-              id: "3",
-              etiqueta: "Coordinadora de Inglés (Primaria)",
-              persona: {
-                id: "3",
-                nombre: "Florentina Gonzales",
-                cargo: "Coordinadora de Inglés",
-                tipo: "Contratada",
-                horas: 34,
-              },
-              children: [
-                {
-                  id: "3-1",
-                  etiqueta: "Profesores de Inglés (Primaria)",
-                  persona: {
-                    id: "3-1",
-                    nombre: "Equipo de Inglés",
-                    cargo: "Profesores de Inglés",
-                    tipo: "Titular",
-                    horas: 0,
-                  },
-                  listaPersonas: [
-                    { id: "3-1-1", nombre: "Martín Córdoba", cargo: "Profesor de Inglés", tipo: "Titular", horas: 16 },
-                    { id: "3-1-2", nombre: "Priscila Mittelman", cargo: "Profesor de Inglés", tipo: "Titular", horas: 10.6 },
-                    { id: "3-1-3", nombre: "Laura Lazarte", cargo: "Profesor de Inglés", tipo: "Titular", horas: 10.6 },
-                    { id: "3-1-4", nombre: "Cristian López", cargo: "Profesor de Inglés", tipo: "Titular", horas: 16 },
-                    { id: "3-1-5", nombre: "Sofía Filippini", cargo: "Profesor de Inglés", tipo: "Titular", horas: 5.3 },
-                    { id: "3-1-6", nombre: "Salas María Florencia", cargo: "Profesor de Inglés", tipo: "Titular", horas: 5.3 },
-                    { id: "3-1-7", nombre: "Karina Correa", cargo: "Profesor de Inglés", tipo: "Titular", horas: 5.3 },
-                  ],
-                },
-              ],
-            },
             {
               id: "4",
               etiqueta: "Equipo Docente (Primaria)",
@@ -136,7 +112,6 @@ export const orgData = {
                 tipo: "Titular",
                 horas: 0,
               },
-              // --- 👇 DATOS REALES DE PROFESORES DE SECUNDARIA 👇 ---
               listaPersonas: [
                 { id: "sec_24_0", nombre: "Arnedo Daniel", cargo: "Profesor de Arte y Ed. Plastica", tipo: "Titular", horas: 16.0 },
                 { id: "sec_24_1", nombre: "Barrios Lucas", cargo: "Profesor de Fisica y Fe y Vida", tipo: "Titular", horas: 16.0 },
@@ -186,13 +161,48 @@ export const orgData = {
                 { id: "sec_8_36", nombre: "Corvalán Claudio", cargo: "Pec - Profesor Fe y Vida", tipo: "Titular", horas: 34.0 },
               ],
             },
+          ],
+        },
+        
+        // === DEPARTAMENTO DE INGLÉS ===
+        {
+          id: "3",
+          etiqueta: "Coordinadora Gral. de Inglés",
+          persona: {
+            id: "3",
+            nombre: "Florentina Gonzales",
+            cargo: "Coordinadora General de Inglés",
+            tipo: "Contratada",
+            horas: 34,
+          },
+          children: [
+            {
+              id: "3-1",
+              etiqueta: "Equipo de Inglés (Primaria)",
+              persona: {
+                id: "3-1",
+                nombre: "Profesores de Inglés Primaria",
+                cargo: "Profesores de Inglés",
+                tipo: "Titular",
+                horas: 0,
+              },
+              listaPersonas: [
+                { id: "3-1-1", nombre: "Martín Córdoba", cargo: "Profesor de Inglés", tipo: "Titular", horas: 16 },
+                { id: "3-1-2", nombre: "Priscila Mittelman", cargo: "Profesor de Inglés", tipo: "Titular", horas: 10.6 },
+                { id: "3-1-3", nombre: "Laura Lazarte", cargo: "Profesor de Inglés", tipo: "Titular", horas: 10.6 },
+                { id: "3-1-4", nombre: "Cristian López", cargo: "Profesor de Inglés", tipo: "Titular", horas: 16 },
+                { id: "3-1-5", nombre: "Sofía Filippini", cargo: "Profesor de Inglés", tipo: "Titular", horas: 5.3 },
+                { id: "3-1-6", nombre: "Salas María Florencia", cargo: "Profesor de Inglés", tipo: "Titular", horas: 5.3 },
+                { id: "3-1-7", nombre: "Karina Correa", cargo: "Profesor de Inglés", tipo: "Titular", horas: 5.3 },
+              ],
+            },
             {
               id: "10",
               etiqueta: "Equipo de Inglés (Secundaria)",
               persona: {
                 id: "10",
-                nombre: "Profesores de Inglés",
-                cargo: "Departamento de Inglés",
+                nombre: "Profesores de Inglés Secundaria",
+                cargo: "Profesores de Inglés",
                 tipo: "Titular",
                 horas: 0,
               },
@@ -203,17 +213,17 @@ export const orgData = {
                 { id: "sec_14_23", nombre: "Nuñez Tadeo", cargo: "Profesor Inglés", tipo: "Titular", horas: 9.33 },
                 { id: "sec_16_27", nombre: "Ruiz Demetrio", cargo: "Profesor Inglés", tipo: "Titular", horas: 10.67 },
               ],
-            },
-          ],
+            }
+          ]
         },
 
-        // === EQUIPO POLO TUCUMÁN (ESTRUCTURA JERÁRQUICA) ===
+        // === ÁREA DE GESTIÓN Y FAMILIA ===
         {
           id: "polo",
-          etiqueta: "Equipo Polo Tucumán",
+          etiqueta: "Área de Gestión y Familia",
           persona: {
             id: "polo",
-            nombre: "Equipo Polo Tucumán",
+            nombre: "Área de Gestión y Familia",
             cargo: "Dirección Operativa y Administrativa",
             tipo: "Titular",
             horas: 0,

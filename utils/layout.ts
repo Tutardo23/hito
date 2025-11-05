@@ -15,13 +15,13 @@ type OrgDataNode = {
   etiqueta?: string;
   persona: Persona;
   children?: OrgDataNode[];
-  listaPersonas?: Persona[]; // <<-- ¡ARREGLO DEL ERROR DE TIPADO!
+  listaPersonas?: Persona[];
 };
 
 export const nodeWidth = 300;
 export const nodeHeight = 150;
 
-// --- Paleta de Colores Jerárquicos (sin cambios) ---
+// --- Paleta de Colores Jerárquicos ---
 const colorAzulPucara = "#1C3A62";
 const colorVerdePucara = "#2E6B4B";
 const colorDoradoPucara = "#ECC300";
@@ -46,13 +46,8 @@ export const transformarDatos = (
     const nodeId = nodo.id;
     const label = nodo.etiqueta || nodo.persona.nombre;
 
-    // Determina si expande sub-nodos (usando 'children')
     const hasSubNodes = !!(nodo.children && nodo.children.length > 0); 
-    
-    // Determina si debe mostrar la lista (usando 'listaPersonas')
     const hasPersonaList = !!(nodo.listaPersonas && nodo.listaPersonas.length > 0);
-    
-    // Pasa la lista de personas que YA ESTÁ CARGADA en data.ts
     const listaPersonas = nodo.listaPersonas || []; 
 
     const color = hierarchyColors[depth] || colorGrisClaro;
@@ -105,7 +100,7 @@ export const getLayoutedElements = (
   edges: Edge[]
 ): { nodes: Node[]; edges: Edge[] } => {
   
-  // --- ESPACIADO EXACTO: ranksep 100 y nodesep 70 (SIN CAMBIOS) ---
+  // Distancia exacta: 100 y 70
   dagreGraph.setGraph({ rankdir: "TB", ranksep: 100, nodesep: 70 });
   
   nodes.forEach((node) => {
