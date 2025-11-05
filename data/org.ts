@@ -12,10 +12,10 @@ export const orgData = {
   // --- LISTA DE PERSONAS AÑADIDA AL CONSEJO ---
   listaPersonas: [
     { id: "1", nombre: "Juan Manuel Romano", cargo: "Director General", tipo: "Titular", horas: 34 },
-    { id: "2", nombre: "Adriana Lozano", cargo: "Directora Nivel Primario", tipo: "Titular", horas: 31 },
+    
     { id: "sec_6_37", nombre: "Veron Ponce Hernan", cargo: "Rector Nivel Secundario", tipo: "Titular", horas: 34.0 },
-    { id: "3", nombre: "Florentina Gonzales", cargo: "Coordinadora Gral. de Inglés", tipo: "Contratada", horas: 34 },
-    { id: "sec_18_7", nombre: "Casiva Fernando", cargo: "Vice Rector-Profesor Lengua", tipo: "Titular", horas: 34.0 },
+    
+    { id: "sec_18_7", nombre: "Fernando Casiva", cargo: "Vice Rector-Profesor Lengua", tipo: "Titular", horas: 34.0 },
     { id: "p8", nombre: "Maria Eugenia Martin", cargo: "Recepción, Área Familia, Consejos de Dirección", tipo: "Titular", horas: 34 },
   ],
   children: [
