@@ -1,10 +1,17 @@
 // components/OrganigramaPro.tsx
 "use client";
-import React, { useMemo, useCallback, useState, useEffect } from "react";
+import React, {
+  // ... (otros imports)
+  useMemo,
+  useCallback,
+  useState,
+  useEffect,
+} from "react";
 import ReactFlow, {
   Controls,
   Background,
   MiniMap,
+  // ... (otros imports)
   ReactFlowProvider,
   useReactFlow,
   useNodesState,
@@ -20,8 +27,10 @@ import "reactflow/dist/style.css";
 
 import NodeElegante from "./NodeElegante";
 import NavigationUI from "./NavigationUI";
-import { orgData } from "../data/org";
-// --- 👇 Importamos los tamaños ---
+import InfoSidebarPucara from "./InfoSidebarPucara"; // Importamos el sidebar
+import {
+  orgData,
+} from "../data/org";
 import {
   transformarDatos,
   getLayoutedElements,
@@ -29,18 +38,25 @@ import {
   nodeHeight,
 } from "../utils/layout";
 
+type Persona = {
+  id: string;
+  nombre: string;
+  cargo: string;
+  tipo: string;
+  horas: number;
+};
+
 const nodeTypes = {
   customElegant: NodeElegante,
 };
 
-// --- Obtenemos layout (sin cambios) ---
+// ... (layoutedInitialNodes y getDescendants sin cambios)
 const { nodes: layoutedInitialNodes, edges: layoutedInitialEdges } =
   getLayoutedElements(
     transformarDatos(orgData).initialNodes,
     transformarDatos(orgData).initialEdges
   );
 
-// --- Función getDescendants (sin cambios) ---
 const getDescendants = (
   node: Node,
   nodes: Node[],
@@ -56,25 +72,21 @@ const getDescendants = (
 };
 
 function OrganigramaContent() {
-  // --- 👇 Importamos las funciones de la cámara ---
   const { setCenter, fitView } = useReactFlow();
-
   const [nodes, setNodes, onNodesChange] = useNodesState(layoutedInitialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedInitialEdges);
-
   const [focusedNodeId, setFocusedNodeId] = useState<string | null>(
     layoutedInitialNodes[0]?.id || null
   );
+  const [sidebarData, setSidebarData] = useState<Persona[] | null>(null);
 
-  // --- Lógica de Expandir/Colapsar (AHORA MÁS LIMPIA) ---
-  // (Quitamos el 'fitView' molesto de aquí)
+  // ... (onExpandCollapse, focusOnNode, useEffect inicial, onShowInfo, handleNavigate... toda la lógica se mantiene igual)
   const onExpandCollapse = useCallback(
     (nodeId: string, expand?: boolean) => {
+      // ... (misma lógica de antes)
       const node = nodes.find(n => n.id === nodeId);
       if (!node) return;
-
       const isExpanding = expand !== undefined ? expand : !node.data.isExpanded;
-
       setNodes(nds =>
         nds.map(n =>
           n.id === nodeId
@@ -82,7 +94,6 @@ function OrganigramaContent() {
             : n
         )
       );
-
       if (isExpanding) {
         const children = getOutgoers(node, nodes, edges);
         const edgesToReveal = getConnectedEdges(children, edges);
@@ -106,54 +117,55 @@ function OrganigramaContent() {
           eds.map(e => (edgesToHide.find(eh => eh.id === e.id) ? { ...e, hidden: true } : e))
         );
       }
-    },
-    [nodes, edges, setNodes, setEdges]
+    }, [nodes, edges, setNodes, setEdges]
   );
-
-  // --- NUEVA FUNCIÓN DE FOCO (EL CAMBIO CLAVE) ---
+  
   const focusOnNode = useCallback(
     (id: string) => {
       const node = nodes.find(n => n.id === id);
       if (node) {
         setFocusedNodeId(id);
-        // Centramos la cámara en el nodo, con un zoom fijo de 1 (100%)
-        // y una duración de 600ms para el paneo suave.
         setCenter(node.position.x + nodeWidth / 2, node.position.y + nodeHeight / 2, {
-          zoom: 1, // Zoom consistente (efecto diapositiva)
+          zoom: 1,
           duration: 600,
         });
       }
-    },
-    [nodes, setCenter, setFocusedNodeId]
+    }, [nodes, setCenter, setFocusedNodeId]
   );
 
-  // --- Centrar al inicio ---
   useEffect(() => {
-    // Usamos fitView solo UNA VEZ al cargar
     fitView({ duration: 0, padding: 0.2 });
     if (focusedNodeId) {
-      // Y luego centramos en el nodo raíz
       focusOnNode(focusedNodeId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Se ejecuta solo al montar
+  }, []);
 
-  // --- Lógica de Navegación (ahora solo llama a focusOnNode) ---
+  const onShowInfo = useCallback(
+    (nodeId: string) => {
+      const node = nodes.find(n => n.id === nodeId);
+      if (node && node.data.hasList) {
+        setSidebarData(node.data.listaPersonas);
+        focusOnNode(nodeId);
+      }
+    },
+    [nodes, focusOnNode]
+  );
+
   const handleNavigate = (direction: "up" | "down" | "left" | "right") => {
+    // ... (misma lógica de antes)
     const node = nodes.find(n => n.id === focusedNodeId);
     if (!node) return;
-
     const parent = getIncomers(node, nodes, edges)[0];
     const children = getOutgoers(node, nodes, edges);
     const siblings = parent ? getOutgoers(parent, nodes, edges) : [];
     const currentIndex = siblings.findIndex(n => n.id === node.id);
-
     switch (direction) {
       case "up":
         if (parent) {
           focusOnNode(parent.id);
-          // Colapsar los hijos que dejamos atrás
           onExpandCollapse(node.id, false);
+          setSidebarData(null);
         }
         break;
       case "down":
@@ -161,23 +173,25 @@ function OrganigramaContent() {
           if (!node.data.isExpanded) {
             onExpandCollapse(node.id, true);
           }
-          focusOnNode(children[0].id); // Enfocar al primer hijo
+          focusOnNode(children[0].id);
+          setSidebarData(null);
         }
         break;
       case "left":
         if (siblings[currentIndex - 1]) {
           focusOnNode(siblings[currentIndex - 1].id);
+          setSidebarData(null);
         }
         break;
       case "right":
         if (siblings[currentIndex + 1]) {
           focusOnNode(siblings[currentIndex + 1].id);
+          setSidebarData(null);
         }
         break;
     }
   };
 
-  // --- Inyectar 'isFocused' (sin cambios) ---
   const nodesWithState = useMemo(() => {
     return nodes.map(n => ({
       ...n,
@@ -185,13 +199,13 @@ function OrganigramaContent() {
         ...n.data,
         isFocused: n.id === focusedNodeId,
         onExpandCollapse: onExpandCollapse,
+        onShowInfo: onShowInfo,
       },
     }));
-  }, [nodes, focusedNodeId, onExpandCollapse]);
+  }, [nodes, focusedNodeId, onExpandCollapse, onShowInfo]);
 
-  // --- Calcular flechas (sin cambios) ---
   const navigationState = useMemo(() => {
-    // ... (lógica igual que antes)
+    // ... (misma lógica de antes)
     const node = nodes.find(n => n.id === focusedNodeId);
     if (!node) return { up: false, down: false, left: false, right: false };
     const parent = getIncomers(node, nodes, edges)[0];
@@ -206,33 +220,82 @@ function OrganigramaContent() {
     };
   }, [focusedNodeId, nodes, edges]);
 
-  // --- NUEVO: Handler para Clic en Nodo ---
   const onNodeClick = useCallback(
     (_: React.MouseEvent, node: Node) => {
       focusOnNode(node.id);
+      if (!node.data.hasList) {
+        setSidebarData(null);
+      } else {
+        if(node.id === focusedNodeId) {
+          onShowInfo(node.id);
+        }
+      }
     },
-    [focusOnNode]
+    [focusOnNode, focusedNodeId, onShowInfo]
   );
 
   return (
     <ReactFlow
+      // ... (mismas props)
       nodes={nodesWithState}
       edges={edges}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
-      onNodeClick={onNodeClick} // <-- Añadido
+      onNodeClick={onNodeClick}
       nodeTypes={nodeTypes}
       proOptions={{ hideAttribution: true }}
-      className="bg-gradient-to-br from-blue-50 to-indigo-100"
-      // --- Habilitamos la interacción manual ---
-      nodesDraggable={false} // No arrastrar nodos
-      panOnDrag={true} // Sí arrastrar el fondo
-      zoomOnScroll={true} // Sí hacer zoom con la rueda
+      className="bg-gray-50"
+      nodesDraggable={false}
+      panOnDrag={true}
+      zoomOnScroll={true}
+      minZoom={0.1}
+  maxZoom={2}
+  fitView
     >
-      <Controls showInteractive={false} className="!left-4 !top-4" />
-      <MiniMap position="bottom-left" />
-      <Background variant={BackgroundVariant.Dots} gap={16} size={1} />
+      <Controls
+        showInteractive={false}
+        className="!left-4 !top-4 !bg-white !shadow-lg !rounded-lg"
+        style={{ color: "#1C3A62" }}
+      />
+      <MiniMap
+        position="bottom-left"
+        // --- 👇 ACTUALIZACIÓN DEL COLOR DEL MINIMAPA ---
+        nodeColor={(node: Node) => {
+          return node.data.color || "#ccc"; // Usa el color jerárquico
+        }}
+        // --- (Fin de la actualización) ---
+        maskColor="#e0f2f7"
+      />
+      <Background
+        variant={BackgroundVariant.Dots}
+        gap={16}
+        size={1}
+        color="#a1a1aa"
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 20,
+          right: 20,
+          zIndex: 10,
+          pointerEvents: "none",
+          width: "80px",
+          height: "auto",
+        }}
+      >
+        {/* Asegúrate de que esta ruta sea correcta (debe estar en /public/images/) */}
+        <img
+          src="/images/escudo-pucara.png"
+          alt="Colegio Pucará Logo"
+          className="w-full h-auto"
+        />
+      </div>
       <NavigationUI onNavigate={handleNavigate} canNav={navigationState} />
+
+      <InfoSidebarPucara
+        data={sidebarData}
+        onClose={() => setSidebarData(null)}
+      />
     </ReactFlow>
   );
 }

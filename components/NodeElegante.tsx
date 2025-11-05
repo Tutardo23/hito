@@ -1,7 +1,16 @@
 // components/NodeElegante.tsx
 "use client";
 import { Handle, Position } from "reactflow";
-import { FaUserCircle, FaClock, FaPlus, FaMinus } from "react-icons/fa";
+import { FaClock, FaPlus, FaMinus, FaUsers } from "react-icons/fa";
+import Image from "next/image";
+
+type Persona = {
+  id: string;
+  nombre: string;
+  cargo: string;
+  tipo: string;
+  horas: number;
+};
 
 type PersonaData = {
   id: string;
@@ -10,79 +19,233 @@ type PersonaData = {
   tipo: "Titular" | "Contratado";
   horas: number;
   hasChildren: boolean;
+  hasList: boolean;
   isExpanded: boolean;
-  isFocused: boolean; // <-- NUEVO: Para saber si es la "diapositiva" activa
+  isFocused: boolean;
+  listaPersonas?: Persona[];
+  color: string;
+  depth: number;
   onExpandCollapse?: (id: string) => void;
+  onShowInfo?: (id: string) => void;
 };
 
-export default function NodeElegante({ data }: { data: PersonaData }) {
-  const isTitular = data.tipo === "Titular";
-  const bgColor = isTitular ? "bg-blue-700" : "bg-teal-600";
-  const textColor = "text-white";
-  const shadowColor = isTitular ? "shadow-blue-800/40" : "shadow-teal-700/40";
+// --- Colores Constantes ---
+const colorAzulPucara = "#1C3A62";
+const colorAmarilloPucara = "#ECC300";
 
-  // --- NUEVO: Estilo de Foco ---
-  const focusRing = data.isFocused
-    ? "ring-4 ring-offset-2 ring-yellow-400"
-    : "ring-0";
-
-  const handleExpandClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (data.onExpandCollapse) {
-      data.onExpandCollapse(data.id);
-    }
-  };
+// --- COMPONENTE 1: Tarjeta de Jerarquía (Para Directores, etc.) ---
+// (Este componente no tiene cambios)
+const NodeCard = ({ data }: { data: PersonaData }) => {
+  const bgColor = data.color;
+  const headerTextColor =
+    bgColor === colorAmarilloPucara ? "text-gray-900" : "text-white";
 
   return (
-    <div
-      className={`relative rounded-xl shadow-lg ${shadowColor}
-                  min-w-[280px] max-w-[320px] p-0 overflow-hidden 
-                  transition-all duration-300 ${focusRing}`} // <-- Añadido {focusRing}
-    >
-      {/* Etiqueta de tipo */}
+    <>
       <div
-        className={`absolute top-0 right-0 px-3 py-1 text-xs font-bold rounded-bl-lg
-                    ${isTitular ? "bg-blue-800" : "bg-teal-700"} ${textColor}`}
+        className={`absolute top-0 right-0 px-3 py-1 text-xs font-bold rounded-bl-lg ${headerTextColor}`}
+        style={{ backgroundColor: bgColor, opacity: 0.8 }}
       >
         {data.tipo}
       </div>
-
-      {/* Header */}
-      <div className={`${bgColor} ${textColor} p-4 pb-2 rounded-t-xl`}>
+      <div
+        className={`p-4 pb-2 rounded-t-xl ${headerTextColor}`}
+        style={{ backgroundColor: bgColor }}
+      >
         <div className="flex items-center mb-2">
-          <FaUserCircle className="text-3xl mr-3 opacity-80" />
+          <div
+            className="relative w-10 h-10 mr-3 rounded-full flex-shrink-0"
+            style={{
+              backgroundColor:
+                bgColor === colorAmarilloPucara
+                  ? "rgba(28, 58, 98, 0.1)"
+                  : "rgba(255, 255, 255, 0.8)",
+            }}
+          >
+            <Image
+              src="/images/escudo-pucara.png"
+              alt="Colegio Pucará"
+              layout="fill"
+              objectFit="contain"
+              className="p-1"
+            />
+          </div>
           <h3 className="font-extrabold text-xl leading-tight">
             {data.nombre}
           </h3>
         </div>
         <p className="text-sm font-light opacity-80">{data.cargo}</p>
       </div>
-
-      {/* Body */}
       <div className="bg-gray-50 text-gray-800 p-4 pt-2 rounded-b-xl">
         {data.horas > 0 && (
           <div className="flex items-center text-sm mt-1">
-            <FaClock className="text-blue-500 mr-2" />
+            <FaClock className="mr-2" style={{ color: colorAzulPucara }} />
             <span className="font-semibold">{data.horas} hs.</span>
           </div>
         )}
       </div>
+    </>
+  );
+};
 
-      {/* --- BOTÓN +/- (Vuelve a estar ABAJO) --- */}
-      {data.hasChildren && (
+// --- 👇 COMPONENTE 2: "Bloque de Profesores" (NUEVO DISEÑO "PREMIUM") 👇 ---
+const NodeGridPremium = ({ data }: { data: PersonaData }) => {
+  const bgColor = data.color;
+  const headerTextColor =
+    bgColor === colorAmarilloPucara ? "text-gray-900" : "text-white";
+  
+  // Usamos el color Azul Pucará como color de borde para el grid
+  const gridBorderColor = "rgba(28, 58, 98, 0.2)"; // Azul Pucará con opacidad
+
+  const gridNames = data.listaPersonas || [];
+  
+  // Función para obtener Nombre y Apellido en líneas separadas
+  const formatName = (fullName: string) => {
+    const parts = fullName.split(" ");
+    const firstName = parts[0];
+    const lastName = parts.length > 1 ? parts.slice(1).join(" ") : "";
+    return (
+      <>
+        <span className="font-semibold">{firstName}</span>
+        <span className="text-xs opacity-80">{lastName}</span>
+      </>
+    );
+  };
+
+  return (
+    <div
+      className="rounded-xl overflow-hidden"
+      style={{ backgroundColor: bgColor }}
+    >
+      {/* Header (Título del equipo) */}
+      <div
+        className={`p-4 text-left flex items-center ${headerTextColor}`}
+        style={{ backgroundColor: bgColor }}
+      >
+        {/* Usamos el logo aquí también para consistencia */}
+        <div
+          className="relative w-10 h-10 mr-3 rounded-full flex-shrink-0"
+          style={{
+            backgroundColor:
+              bgColor === colorAmarilloPucara
+                ? "rgba(28, 58, 98, 0.1)"
+                : "rgba(255, 255, 255, 0.8)",
+          }}
+        >
+          <Image
+            src="/images/escudo-pucara.png"
+            alt="Colegio Pucará"
+            layout="fill"
+            objectFit="contain"
+            className="p-1"
+          />
+        </div>
+        <div>
+          <h3 className="font-extrabold text-xl">{data.nombre}</h3>
+          <p className="text-sm font-light opacity-80">{data.cargo}</p>
+        </div>
+      </div>
+
+      {/* Grid de Nombres "Premium" */}
+      <div className="grid grid-cols-2 bg-white">
+        {gridNames.map((persona, index) => (
+          <div
+            key={persona.id || index}
+            className="text-left p-3 flex flex-col leading-tight"
+            style={{
+              color: colorAzulPucara,
+              borderTop: `1px solid ${gridBorderColor}`,
+              borderLeft: index % 2 !== 0 ? `1px solid ${gridBorderColor}` : "none",
+            }}
+          >
+            {formatName(persona.nombre)}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+// --- (Fin del nuevo diseño) ---
+
+
+// --- COMPONENTE PRINCIPAL (Decide cuál renderizar) ---
+export default function NodeElegante({ data }: { data: PersonaData }) {
+  const {
+    isFocused,
+    hasChildren,
+    hasList,
+    isExpanded,
+    color,
+    onExpandCollapse,
+    onShowInfo,
+  } = data;
+
+  const shadowColor = "shadow-gray-400/50";
+  const focusRing = isFocused
+    ? `ring-4 ring-offset-2 ring-[${colorAmarilloPucara}]`
+    : "ring-0";
+
+  const handleExpandClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onExpandCollapse) {
+      onExpandCollapse(data.id);
+    }
+  };
+  const handleInfoClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onShowInfo) {
+      onShowInfo(data.id);
+    }
+  };
+
+  return (
+    <div
+      className={`relative rounded-xl shadow-lg ${shadowColor}
+                  min-w-[320px] max-w-[320px] 
+                  transition-all duration-300 ${focusRing}`}
+      style={{
+        width: 320, // Ancho fijo
+      }}
+    >
+      {/* --- RENDERIZADO CONDICIONAL --- */}
+      {data.hasList ? (
+        <NodeGridPremium data={data} />
+      ) : (
+        <NodeCard data={data} />
+      )}
+
+      {/* --- Botón +/- (Solo si hay sub-nodos) --- */}
+      {hasChildren && (
         <button
           onClick={handleExpandClick}
           className={`absolute -bottom-4 left-1/2 -translate-x-1/2
                       w-8 h-8 rounded-full flex items-center justify-center
-                      text-white shadow-md transition-all duration-200
-                      ${isTitular ? "bg-blue-800 hover:bg-blue-900" : "bg-teal-700 hover:bg-teal-800"}`}
-          aria-label={data.isExpanded ? "Colapsar" : "Expandir"}
+                      text-white shadow-md transition-all duration-200`}
+          style={{ backgroundColor: color }}
+          aria-label={isExpanded ? "Colapsar" : "Expandir"}
         >
-          {data.isExpanded ? <FaMinus size={12} /> : <FaPlus size={12} />}
+          {isExpanded ? <FaMinus size={12} /> : <FaPlus size={12} />}
         </button>
       )}
 
-      {/* --- HANDLES (Vuelven a estar Arriba/Abajo) --- */}
+      {/* --- Botón de Info (si hay lista de personas) --- */}
+      {hasList && (
+        <button
+          onClick={handleInfoClick}
+          className={`absolute -bottom-4 left-1/2 -translate-x-1/2
+                      w-8 h-8 rounded-full flex items-center justify-center
+                      shadow-md transition-all duration-200`}
+          style={{
+            backgroundColor: colorAmarilloPucara,
+            color: colorAzulPucara,
+          }}
+          aria-label="Ver equipo"
+        >
+          <FaUsers size={14} />
+        </button>
+      )}
+
+      {/* --- Handles Arriba/Abajo --- */}
       <Handle
         type="target"
         position={Position.Top}
