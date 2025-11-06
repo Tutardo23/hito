@@ -172,7 +172,7 @@ export const orgData = {
             id: "3",
             nombre: "Florentina Gonzales",
             cargo: "Coordinadora General de Inglés",
-            tipo: "Contratada",
+            tipo: "Titular",
             horas: 34,
           },
           children: [
@@ -225,7 +225,7 @@ export const orgData = {
             id: "polo",
             nombre: "Área de Gestión y Familia",
             cargo: "Dirección Operativa y Administrativa",
-            tipo: "Titular",
+            tipo: "",
             horas: 0,
           },
           children: [

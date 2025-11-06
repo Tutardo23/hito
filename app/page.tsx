@@ -1,11 +1,8 @@
-import OrganigramaPro from "@/components/OrganigramaPro"; // Ajusta esta ruta si es necesario
+import OrganigramaPro from "@/components/OrganigramaPro";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
-      {/* Puedes borrar el padding (p-24) u otro estilo 
-        si quieres que el organigrama ocupe toda la pantalla.
-      */}
+    <main className="flex h-screen w-screen items-center justify-center bg-gray-50 overflow-hidden">
       <OrganigramaPro />
     </main>
   );
