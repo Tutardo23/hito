@@ -16,7 +16,7 @@ export const orgData = {
     { id: "sec_6_37", nombre: "Hernan Ponce Veron", cargo: "Rector Nivel Secundario", tipo: "Titular", horas: 34.0 },
     
     { id: "sec_18_7", nombre: "Fernando Casiva", cargo: "Vice Rector-Profesor Lengua", tipo: "Titular", horas: 34.0 },
-    { id: "p8", nombre: "Maria Eugenia Martin", cargo: "Recepción, Área Familia, Consejos de Dirección", tipo: "Titular", horas: 34 },
+    { id: "p8", nombre: "Maria Eugenia Martin", cargo: "Recepción, Área Familia, Consejos de Dirección", tipo: "Titular", horas: 2 },
   ],
   children: [
     {
@@ -42,6 +42,18 @@ export const orgData = {
             horas: 31,
           },
           children: [
+            {
+  id: "secretaria-primaria",
+  etiqueta: "Secretaría de Nivel Primario",
+  persona: {
+    id: "secretaria-primaria",
+    nombre: "César Juárez",
+    cargo: "Secretario de Nivel Primario",
+    tipo: "Titular",
+    horas: 34,
+  },
+},
+
             {
               id: "4",
               etiqueta: "Equipo Docente (Primaria)",
@@ -102,6 +114,29 @@ export const orgData = {
             horas: 34.0,
           },
           children: [
+           {
+  id: "secretaria-secundaria",
+  etiqueta: "Secretaría de Nivel Secundario",
+  persona: {
+    id: "secretaria-secundaria",
+    nombre: "Enrique Torino",
+    cargo: "Secretario de Nivel Secundario",
+    tipo: "Titular",
+    horas: 34,
+  },
+  listaPersonas: [
+    {
+      id: "sec-apoyo-ana",
+      nombre: "Ana María",
+      cargo: "Apoyo Secretaría Secundaria",
+      tipo: "Titular",
+      horas: 20,
+    },
+  ],
+},
+
+
+
             {
               id: "8",
               etiqueta: "Equipo Docente (Secundaria)",
@@ -166,15 +201,23 @@ export const orgData = {
   etiqueta: "Equipo de Tutores (Secundaria)",
   persona: {
     id: "tutores",
-    nombre: "Equipo de Tutores",
-    cargo: "Tutorías y acompañamiento",
+    nombre: "Gerardo Tumini",
+    cargo: "Jefe de Tutores",
     tipo: "Titular",
-    horas: 0,
+    horas: 14,
   },
   listaPersonas: [
-    // Por ahora vacío, cuando tengas nombres los agregamos
+    { id: "tutor1", nombre: "Emmanuel Parrado", cargo: "Tutor", tipo: "Titular", horas: 3 },
+    { id: "tutor2", nombre: "Jesús Guillermo Soruco", cargo: "Tutor", tipo: "Titular", horas: 1 },
+    { id: "tutor3", nombre: "Christian Kasem", cargo: "Tutor", tipo: "Titular", horas: 8 },
+    { id: "tutor4", nombre: "Carlos Marcelo Suárez Villafañe", cargo: "Tutor", tipo: "Titular", horas: 3 },
+    { id: "tutor5", nombre: "Luis Enrique Moscol Seminario", cargo: "Tutor", tipo: "Titular", horas: 5 },
+    { id: "tutor6", nombre: "Lucas Matías Barrios", cargo: "Tutor", tipo: "Titular", horas: 3 },
+    { id: "tutor7", nombre: "Marcos Lord Figueroa", cargo: "Tutor", tipo: "Titular", horas: 10 },
+    { id: "tutor8", nombre: "Matías Ortiz de Rozas", cargo: "Tutor", tipo: "Titular", horas: 5 },
   ],
-}
+},
+
 
           ],
         },
@@ -228,209 +271,112 @@ export const orgData = {
                 { id: "sec_14_23", nombre: "Nuñez Tadeo", cargo: "Profesor Inglés", tipo: "Titular", horas: 9.33 },
                 { id: "sec_16_27", nombre: "Ruiz Demetrio", cargo: "Profesor Inglés", tipo: "Titular", horas: 10.67 },
               ],
-            }
-          ]
-        },
-
-        // === ÁREA DE GESTIÓN Y FAMILIA ===
-        {
-          id: "polo",
-          etiqueta: "Área de Gestión y Familia",
-          persona: {
-            id: "polo",
-            nombre: "Área de Gestión y Familia",
-            cargo: "Dirección Operativa y Administrativa",
-            tipo: "",
-            horas: 0,
-          },
-          children: [
-            {
-              id: "polo-adm",
-              etiqueta: "Administración, Recepción y Comunicación",
-              persona: {
-                id: "polo-adm",
-                nombre: "Administración y Recepción",
-                cargo: "Personal Administrativo y de Apoyo",
-                tipo: "Titular",
-                horas: 0,
-              },
-              listaPersonas: [
-                
-                
-                { id: "p7", nombre: "Lucia Beverina", cargo: "Recepción Pucará tarde y taller de Inglés", tipo: "Titular", horas: 16 },
-                
-                
-              ],
             },
             {
-              id: "polo-doe",
-              etiqueta: "Departamento de Orientación Escolar (DOE)",
-              persona: {
-                id: "polo-doe",
-                nombre: "Equipo DOE",
-                cargo: "Psicólogos y Psicopedagogos",
-                tipo: "Titular",
-                horas: 0,
-              },
-              listaPersonas: [
-                { id: "p3", nombre: "Maria Marta Rojas", cargo: "Área Familia POLO", tipo: "Titular", horas: 31 },
-                { id: "p4", nombre: "Milagros Guerrero", cargo: "Psicopedagoga DOE Secundaria PUC", tipo: "Titular", horas: 12 },
-                { id: "p5", nombre: "Maria Fioretti", cargo: "Psicopedagoga DOE Primaria PUC", tipo: "Titular", horas: 15 },
-                { id: "p6", nombre: "Elisa Agüero", cargo: "Psicóloga DOE Primaria", tipo: "Tercerizada", horas: 11 },
-              ],
-            },
-            {
-              id: "polo-ordenanza",
-              etiqueta: "Personal de Ordenanza",
-              persona: {
-                id: "polo-ordenanza",
-                nombre: "Equipo de Servicio",
-                cargo: "Mantenimiento y Servicio",
-                tipo: "Titular",
-                horas: 0,
-              },
-              listaPersonas: [
-                { id: "p9", nombre: "Walter Lencina", cargo: "Ordenanza", tipo: "Titular", horas: 40 },
-                { id: "p10", nombre: "Maximiliano Lencina", cargo: "Ordenanza", tipo: "Titular", horas: 40 },
-                { id: "p11", nombre: "Sebastián Samaquiri", cargo: "Ordenanza", tipo: "Titular", horas: 40 },
-                { id: "p12", nombre: "Edgardo Enrique Rodriguez", cargo: "Ordenanza", tipo: "Titular", horas: 40 },
-                { id: "p13", nombre: "Diego Alejandro Rodriguez", cargo: "Ordenanza", tipo: "Titular", horas: 40 },
-              ],
-            },
-          ],
-        },
-        {
-  id: "admin-polo",
-  etiqueta: "Administración del Polo",
+  id: "taller-ingles",
+  etiqueta: "Taller de Inglés",
   persona: {
-    id: "admin-polo",
-    nombre: "Administración del Polo",
-    cargo: "Equipo de gestión administrativa y soporte del Polo",
-    tipo: "Titular",
-    horas: 0,
-  },
-  children: [
-    // === ÁREA FAMILIA / COMUNICACIÓN / POSTULACIONES ===
-    {
-      id: "polo-familia-comunicacion",
-      etiqueta: "Área Familia, Comunicación y Postulaciones",
-      persona: {
-        id: "polo-familia-comunicacion",
-        nombre: "Área Familia, Comunicación y Postulaciones",
-        cargo: "Equipo de gestión institucional del Polo",
-        tipo: "Titular",
-        horas: 0,
-      },
-      listaPersonas: [
-        { id: "p1", nombre: "Maria Marta Rojas", cargo: "Área Familia (Polo)", tipo: "Titular", horas: 31 },
-        { id: "p2", nombre: "Agostina Garcia Castro", cargo: "Comunicación y Promoción POLO", tipo: "Titular", horas: 20 },
-        { id: "p3", nombre: "Felicitas del Frari", cargo: "Postulaciones, Administración y Recepción POLO", tipo: "Titular", horas: 34 },
-      ],
-    },
-
-    // === ADMINISTRACIÓN Y CONTABILIDAD ===
-    {
-      id: "polo-administracion",
-      etiqueta: "Administración y Contabilidad",
-      persona: {
-        id: "polo-administracion",
-        nombre: "Administración y Contabilidad",
-        cargo: "Gestión administrativa, contable y financiera",
-        tipo: "Titular",
-        horas: 0,
-      },
-      listaPersonas: [
-        { id: "p4", nombre: "Cristina Navarro Zaldarriaga", cargo: "Administración (Polo)", tipo: "Titular", horas: 34 },
-        { id: "p5", nombre: "Cristina Zottoli Z.", cargo: "Contabilidad y Tesorería", tipo: "Titular", horas: 25 },
-      ],
-      children: [
-        {
-          id: "polo-facturacion",
-          etiqueta: "Facturación y Cobranzas",
-          persona: {
-            id: "polo-facturacion",
-            nombre: "Equipo de Facturación y Tesorería",
-            cargo: "Gestión de cobranzas y administración contable",
-            tipo: "Titular",
-            horas: 0,
-          },
-          listaPersonas: [
-            { id: "p6", nombre: "Virginia Melhen", cargo: "Facturación y Tesorería", tipo: "Titular", horas: 34 },
-            { id: "p7", nombre: "Mercedes García Posse", cargo: "Facturación y Cobranzas", tipo: "Titular", horas: 34 },
-            { id: "p8", nombre: "Victoria Morano", cargo: "Facturación (Tercerizada)", tipo: "Tercerizada", horas: 8 },
-          ],
-        },
-      ],
-    },
-
-    // === RECURSOS HUMANOS ===
-    {
-      id: "polo-rrhh",
-      etiqueta: "Recursos Humanos",
-      persona: {
-        id: "polo-rrhh",
-        nombre: "Recursos Humanos",
-        cargo: "Gestión del personal y asesoría",
-        tipo: "Titular",
-        horas: 0,
-      },
-      listaPersonas: [
-        { id: "p9", nombre: "Dolores Kaese", cargo: "RRHH", tipo: "Titular", horas: 34 },
-        { id: "p10", nombre: "Guillermina Conti", cargo: "RRHH", tipo: "Titular", horas: 34 },
-        { id: "p11", nombre: "Belén Manes", cargo: "RRHH (Tercerizada)", tipo: "Tercerizada", horas: 20 },
-      ],
-    },
-
-    // === MANTENIMIENTO Y SERVICIOS ===
-    {
-      id: "polo-mantenimiento",
-      etiqueta: "Mantenimiento, Operaciones y Servicios Generales",
-      persona: {
-        id: "polo-mantenimiento",
-        nombre: "Mantenimiento y Servicios Generales",
-        cargo: "Soporte técnico y edilicio",
-        tipo: "Titular",
-        horas: 0,
-      },
-      listaPersonas: [
-        { id: "p12", nombre: "Juan Pablo Varela", cargo: "Mantenimiento, Operaciones y Servicios Generales", tipo: "Titular", horas: 34 },
-      ],
-    },
-
-    // === ASESORÍA LEGAL ===
-    {
-      id: "polo-legal",
-      etiqueta: "Asesoría Legal",
-      persona: {
-        id: "polo-legal",
-        nombre: "Asesoría Legal",
-        cargo: "Asesoramiento Jurídico del Polo",
-        tipo: "Tercerizada",
-        horas: 15,
-      },
-      listaPersonas: [
-        { id: "p13", nombre: "Clara García Castellanos", cargo: "Asesoría Legal (Tercerizada)", tipo: "Tercerizada", horas: 15 },
-      ],
-    },
-  ],
-},
-
-       {
-  id: "capellanes",
-  etiqueta: "Capellanes",
-  persona: {
-    id: "capellanes",
-    nombre: "Equipo de Capellanes",
-    cargo: "Formación espiritual y acompañamiento",
+    id: "taller-ingles",
+    nombre: "Equipo de Taller de Inglés",
+    cargo: "Talleres complementarios de inglés",
     tipo: "Titular",
     horas: 0,
   },
   listaPersonas: [
-    { id: "cap1", nombre: "Jesús Galindo Bustos", cargo: "Capellán del Polo", tipo: "Titular", horas: 0 },
-    { id: "cap2", nombre: "Andrej Rant", cargo: "Capellán del Polo", tipo: "Titular", horas: 0 },
+    { id: "tall-1", nombre: "Carlos Martín Córdoba", cargo: "Profesor Taller de Inglés", tipo: "Titular", horas: 4 },
+    { id: "tall-2", nombre: "Cristian Gerardo López", cargo: "Profesor Taller de Inglés", tipo: "Titular", horas: 4 },
+    { id: "tall-3", nombre: "Pablo Alejandro Díaz Sorbello", cargo: "Profesor Taller de Inglés", tipo: "Titular", horas: 4 },
+    { id: "tall-4", nombre: "Priscilla Mittelmann", cargo: "Profesora Taller de Inglés", tipo: "Titular", horas: 4 },
+    { id: "tall-5", nombre: "Gustavo Maximiliano Roda", cargo: "Profesor Taller de Inglés", tipo: "Titular", horas: 4 },
+    { id: "tall-6", nombre: "María Marta Ale", cargo: "Profesora Taller de Inglés", tipo: "Titular", horas: 4 },
+    { id: "tall-7", nombre: "Karina Alejandra Correa", cargo: "Profesora Taller de Inglés", tipo: "Titular", horas: 4 },
+    { id: "tall-8", nombre: "Julieta Dulac", cargo: "Profesora Taller de Inglés", tipo: "Titular", horas: 4 },
   ],
 },
 
+            
+          ]
+          
+        },
+
+        // === ÁREA DE GESTIÓN Y FAMILIA ===
+       {
+  id: "grupo-areas",
+  etiqueta: "Áreas Transversales",
+  persona: {
+    id: "grupo-areas",
+    nombre: "Áreas Transversales",
+    cargo: "Agrupador de áreas",
+    tipo: "Titular",
+    horas: 0,
+  },
+  children: [
+    // --- ÁREA LEGAL ---
+    {
+      id: "legal",
+      etiqueta: "Área Legal (Polo)",
+      persona: {
+        id: "legal",
+        nombre: "Dra. Clara García Castellanos",
+        cargo: "Asesoría Legal (Tercerizada)",
+        tipo: "Tercerizada",
+        horas: 15,
+      },
+    },
+
+    // --- ÁREA FAMILIA, COMUNICACIÓN Y POSTULACIONES ---
+    {
+      id: "area-familia-polo",
+      etiqueta: "Área Familia, Comunicación y Postulaciones (Polo)",
+      persona: {
+        id: "area-familia-polo",
+        nombre: "Equipo Área Familia (Polo)",
+        cargo: "Equipo unificado del Polo",
+        tipo: "Titular",
+        horas: 0,
+      },
+      listaPersonas: [
+        { id: "maria-marta-rojas", nombre: "María Marta Rojas", cargo: "Directora Área Familia (Polo)", tipo: "Titular", horas: 31 },
+        { id: "maria-eugenia-martin", nombre: "María Eugenia Martín", cargo: "Colaboradora Área Familia (Polo)", tipo: "Titular", horas: 5 },
+        { id: "felicitas-del-frari", nombre: "Felicitas Del Frari", cargo: "Responsable de Postulaciones (Polo)", tipo: "Titular", horas: 29 },
+        { id: "agostina-garcia", nombre: "Agostina García Castro", cargo: "Comunicación y Promoción (Polo)", tipo: "Titular", horas: 20 },
+      ],
+    },
+
+    // --- CAPELLANÍA ---
+    {
+      id: "capellanes",
+      etiqueta: "Capellanía",
+      persona: {
+        id: "capellanes",
+        nombre: "Equipo de Capellanes",
+        cargo: "Formación espiritual y acompañamiento",
+        tipo: "Titular",
+        horas: 0,
+      },
+      listaPersonas: [
+        { id: "galindo-jesus", nombre: "Jesús Galindo Bustos", cargo: "Capellán del Polo", tipo: "Titular", horas: 10 },
+        { id: "rant-andrej", nombre: "Andrej Rant", cargo: "Capellán del Polo", tipo: "Titular", horas: 31 },
+        
+      ],
+    },
+
+    // --- RECEPCIÓN ---
+    {
+  id: "polo-adm-recepcion",
+  etiqueta: "Recepción",
+  persona: {
+    id: "polo-adm-recepcion",
+    nombre: "Equipo de Recepción",
+    cargo: "Atención y soporte institucional",
+    tipo: "Titular",
+    horas: 0,
+  },
+  listaPersonas: [
+    { id: "p8", nombre: "María Eugenia Martín", cargo: "Recepción Pucará", tipo: "Titular", horas: 25 },
+    { id: "p7", nombre: "Luciana Beverina", cargo: "Recepción Pucará (Tarde)", tipo: "Titular", horas: 14 },
+  ],
+},
 {
   id: "tic",
   etiqueta: "TIC - Plataforma Colegium",
@@ -442,7 +388,141 @@ export const orgData = {
     horas: 34,
   },
   listaPersonas: [],
-}
+},
+
+
+    // --- CONTABILIDAD Y TESORERÍA ---
+    {
+      id: "contabilidad",
+      etiqueta: "Contabilidad y Tesorería",
+      persona: {
+        id: "contabilidad",
+        nombre: "Equipo de Contabilidad y Tesorería",
+        cargo: "Gestión contable y financiera",
+        tipo: "Titular",
+        horas: 0,
+      },
+      listaPersonas: [
+        { id: "cristina-zottoli", nombre: "Cristina Zottoli Z.", cargo: "Contabilidad y Tesorería", tipo: "Titular", horas: 25 },
+        { id: "virginia-melhen", nombre: "Virginia Melhen", cargo: "Facturación y Tesorería", tipo: "Titular", horas: 34 },
+      ],
+    },
+
+    // --- ADMINISTRACIÓN (CON SUBNIVELES) ---
+    {
+      id: "area-admin",
+      etiqueta: "Administración (Polo)",
+      persona: {
+        id: "cristina-navarro",
+        nombre: "Cristina Navarro Zaldarriaga",
+        cargo: "Administración (Polo)",
+        tipo: "Titular",
+        horas: 34,
+      },
+      children: [
+        {
+          id: "facturacion",
+          etiqueta: "Facturación y Cobranzas",
+          persona: {
+            id: "facturacion",
+            nombre: "Equipo de Facturación y Cobranzas",
+            cargo: "Gestión de cobranzas y administración contable",
+            tipo: "Titular",
+            horas: 0,
+          },
+          listaPersonas: [
+            { id: "virginia-m", nombre: "Virginia Melhen", cargo: "Facturación y Tesorería", tipo: "Titular", horas: 34 },
+            { id: "mercedes-gp", nombre: "Mercedes García Posse", cargo: "Facturación y Cobranzas", tipo: "Titular", horas: 34 },
+            { id: "victoria-m", nombre: "Victoria Morano", cargo: "Facturación (Tercerizada)", tipo: "Tercerizada", horas: 8 },
+          ],
+        },
+        {
+          id: "rrhh",
+          etiqueta: "Recursos Humanos",
+          persona: {
+            id: "rrhh",
+            nombre: "Equipo de RRHH",
+            cargo: "Gestión del personal y asesoría",
+            tipo: "Titular",
+            horas: 0,
+          },
+          listaPersonas: [
+            { id: "dolores-k", nombre: "Dolores Kaese", cargo: "RRHH", tipo: "Titular", horas: 34 },
+            { id: "guillermina-c", nombre: "Guillermina Conti", cargo: "RRHH", tipo: "Titular", horas: 34 },
+          ],
+        },
+        {
+          id: "mantenimiento",
+          etiqueta: "Mantenimiento, Operaciones y Servicios Generales",
+          persona: {
+            id: "mantenimiento",
+            nombre: "Juan Pablo Varela",
+            cargo: "Mantenimiento, Operaciones y Servicios Generales",
+            tipo: "Titular",
+            horas: 34,
+          },
+        },
+       {
+  id: "limpieza",
+  etiqueta: "Personal de Limpieza y Conserjes",
+  persona: {
+    id: "limpieza",
+    nombre: "Equipo de Conserjería y Limpieza",
+    cargo: "Soporte institucional y mantenimiento general",
+    tipo: "Titular",
+    horas: 0,
+  },
+  listaPersonas: [
+    { id: "cons1", nombre: "Carlos Walter Lencina", cargo: "Conserje", tipo: "Titular", horas: 46.5 },
+    { id: "cons2", nombre: "César Maximiliano Lencina", cargo: "Conserje", tipo: "Titular", horas: 46.5 },
+    { id: "cons3", nombre: "Álvaro Sebastián Samaquiri", cargo: "Conserje", tipo: "Titular", horas: 46.5 },
+    { id: "cons4", nombre: "Edgardo Enrique Rodríguez", cargo: "Conserje", tipo: "Titular", horas: 32 },
+    { id: "cons5", nombre: "Diego Alejandro Rodríguez", cargo: "Conserje", tipo: "Titular", horas: 40 },
+  ],
+},
+
+
+      ],
+    },
+  ],
+},
+
+{
+  id: "polo-doe",
+  etiqueta: "Departamento de Orientación Escolar (DOE)",
+  persona: {
+    id: "polo-doe",
+    nombre: "Equipo DOE",
+    cargo: "Psicólogos y Psicopedagogos",
+    tipo: "Titular",
+    horas: 0,
+  },
+  children: [
+    {
+      id: "doe-primaria",
+      etiqueta: "DOE Nivel Primario",
+      persona: {
+        id: "doe-primaria",
+        nombre: "María Fioretti",
+        cargo: "Psicopedagoga DOE Primaria",
+        tipo: "Titular",
+        horas: 12,
+      },
+    },
+    {
+      id: "doe-secundaria",
+      etiqueta: "DOE Nivel Secundario",
+      persona: {
+        id: "doe-secundaria",
+        nombre: "María del Milagro Guerrero",
+        cargo: "Psicopedagoga DOE Secundaria",
+        tipo: "Titular",
+        horas: 8,
+      },
+    },
+  ],
+},
+
 
 
       ],

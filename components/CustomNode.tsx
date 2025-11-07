@@ -1,42 +1,59 @@
 "use client";
 import { Handle, Position } from "reactflow";
 
-// Tipamos los datos que recibirá el nodo desde tus datos
 type NodeData = {
   nombre: string;
   cargo: string;
   tipo: string;
   horas: number;
+  color?: string;
+  listaPersonas?: { nombre: string; cargo: string }[];
 };
 
 export default function CustomNode({ data }: { data: NodeData }) {
-  // Color del borde según el tipo de contrato
   const borderColor =
     data.tipo === "Titular" ? "border-blue-600" : "border-green-500";
 
   return (
     <div
-      className={`bg-white rounded-lg shadow-md w-64 ${borderColor} border-l-8`}
+      className={`bg-white rounded-xl shadow-md w-72 border-l-8 ${borderColor}`}
     >
-      {/* Conexión de entrada (arriba) */}
+      {/* Línea de conexión superior */}
       <Handle type="target" position={Position.Top} className="!bg-gray-400" />
 
-      {/* Contenido de la tarjeta */}
-      <div className="p-4">
-        <div className="font-bold text-lg text-blue-900">{data.nombre}</div>
-        <div className="text-gray-600 text-sm">{data.cargo}</div>
-        
-        {/* Solo mostramos horas si son mayores a 0 */}
-        {data.horas > 0 && (
-          <div className="mt-2 pt-2 border-t border-gray-200">
-            <span className="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-              {data.horas} hs.
-            </span>
-          </div>
-        )}
+      {/* CABECERA */}
+      <div
+        className="rounded-t-xl px-4 py-3 text-white"
+        style={{ backgroundColor: data.color || "#1C3A62" }}
+      >
+        {/* 🔹 Cargo ARRIBA */}
+        <div className="text-sm font-semibold opacity-90">
+          {data.cargo}
+        </div>
+        {/* 🔹 Nombre ABAJO */}
+        <div className="text-lg font-bold">{data.nombre}</div>
       </div>
 
-      {/* Conexión de salida (abajo) */}
+      {/* CUERPO: Lista de personas */}
+      {data.listaPersonas && data.listaPersonas.length > 0 && (
+        <div className="p-3 grid grid-cols-2 gap-2 text-sm">
+          {data.listaPersonas.map((p, index) => (
+            <div key={index}>
+              <div className="font-bold text-blue-900">{p.cargo}</div>
+              <div className="text-gray-600 text-xs">{p.nombre}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* HORAS (si tiene) */}
+      {data.horas > 0 && (
+        <div className="px-4 pb-2 text-xs text-right text-gray-500">
+          {data.horas} hs.
+        </div>
+      )}
+
+      {/* Línea de conexión inferior */}
       <Handle
         type="source"
         position={Position.Bottom}

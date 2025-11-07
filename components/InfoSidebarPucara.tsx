@@ -11,16 +11,23 @@ type Persona = {
 };
 
 type SidebarProps = {
-  data: Persona[] | null;
+  data: {
+    principal?: Persona | null; // 👈 el titular del nodo
+    lista?: Persona[] | null;   // 👈 las personas del equipo
+  } | null;
   onClose: () => void;
 };
 
 export default function InfoSidebarPucara({ data, onClose }: SidebarProps) {
-  // --- Colores Pucará ---
   const colorAzulPucara = "#1C3A62";
   const colorAmarilloPucara = "#ECC300";
 
   const isVisible = !!data;
+
+  // Combina titular + lista del equipo
+  const combinedList: Persona[] = [];
+  if (data?.principal) combinedList.push(data.principal);
+  if (data?.lista && data.lista.length > 0) combinedList.push(...data.lista);
 
   return (
     <div
@@ -28,7 +35,7 @@ export default function InfoSidebarPucara({ data, onClose }: SidebarProps) {
                   transform transition-transform duration-500 ease-in-out z-20
                   ${isVisible ? "translate-x-0" : "translate-x-full"}`}
     >
-      {/* --- Header del Sidebar --- */}
+      {/* --- Header --- */}
       <div
         className="flex items-center justify-between p-5"
         style={{ backgroundColor: colorAzulPucara, color: "white" }}
@@ -43,16 +50,16 @@ export default function InfoSidebarPucara({ data, onClose }: SidebarProps) {
         </button>
       </div>
 
-      {/* --- 👇 CONTENIDO (NUEVO DISEÑO "EXECUTIVE") 👇 --- */}
+      {/* --- Contenido --- */}
       <div className="h-[calc(100%-72px)] overflow-y-auto">
         <ul className="divide-y divide-gray-200">
-          {data && data.length > 0 ? (
-            data.map(persona => (
+          {combinedList.length > 0 ? (
+            combinedList.map((persona) => (
               <li
                 key={persona.id}
                 className="p-5 flex justify-between items-center transition-colors hover:bg-gray-50"
               >
-                {/* Nombre y Cargo */}
+                {/* Nombre y cargo */}
                 <div className="flex-1 min-w-0">
                   <span
                     className="font-semibold text-base truncate block"
@@ -65,14 +72,14 @@ export default function InfoSidebarPucara({ data, onClose }: SidebarProps) {
                   </p>
                 </div>
 
-                {/* "Píldora" de Horas (si existen) */}
+                {/* Píldora de horas */}
                 {persona.horas > 0 && (
                   <div className="ml-4 flex-shrink-0">
                     <span
                       className="text-sm font-bold px-3 py-1 rounded-full"
                       style={{
-                        backgroundColor: "rgba(236, 195, 0, 0.2)", // Fondo amarillo claro
-                        color: "#b48b00", // Amarillo oscuro para texto
+                        backgroundColor: "rgba(236, 195, 0, 0.2)",
+                        color: "#b48b00",
                       }}
                     >
                       {persona.horas} hs.
@@ -88,7 +95,6 @@ export default function InfoSidebarPucara({ data, onClose }: SidebarProps) {
           )}
         </ul>
       </div>
-      {/* --- (Fin del nuevo diseño) --- */}
     </div>
   );
 }

@@ -78,7 +78,11 @@ function OrganigramaContent() {
   const [focusedNodeId, setFocusedNodeId] = useState<string | null>(
     layoutedInitialNodes[0]?.id || null
   );
-  const [sidebarData, setSidebarData] = useState<Persona[] | null>(null);
+  const [sidebarData, setSidebarData] = useState<{
+  principal?: Persona | null;
+  lista?: Persona[] | null;
+} | null>(null);
+
 
   // ... (onExpandCollapse, focusOnNode, useEffect inicial, onShowInfo, handleNavigate... toda la lógica se mantiene igual)
   const onExpandCollapse = useCallback(
@@ -142,15 +146,27 @@ function OrganigramaContent() {
   }, []);
 
   const onShowInfo = useCallback(
-    (nodeId: string) => {
-      const node = nodes.find(n => n.id === nodeId);
-      if (node && node.data.hasList) {
-        setSidebarData(node.data.listaPersonas);
-        focusOnNode(nodeId);
-      }
-    },
-    [nodes, focusOnNode]
-  );
+  (nodeId: string) => {
+    const node = nodes.find((n) => n.id === nodeId);
+    if (node && node.data.hasList) {
+      // 👇 Enviamos tanto el titular como la lista de personas
+      setSidebarData({
+        principal: {
+          id: node.data.id,
+          nombre: node.data.nombre,
+          cargo: node.data.cargo,
+          tipo: node.data.tipo,
+          horas: node.data.horas,
+        },
+        lista: node.data.listaPersonas || [],
+      });
+
+      focusOnNode(nodeId);
+    }
+  },
+  [nodes, focusOnNode]
+);
+
 
   const handleNavigate = (direction: "up" | "down" | "left" | "right") => {
     // ... (misma lógica de antes)

@@ -131,12 +131,7 @@ const layoutedNodes = nodes.map((node) => {
   };
 
   // 🟨 Ajuste visual extra solo para los tres nodos finales
-  if (node.id === "capellanes") {
-    node.position.x += 200; // mueve Capellanes hacia la derecha
-  }
-  if (node.id === "tic") {
-    node.position.x += 400; // mueve Nicolás Torres más a la derecha
-  }
+  
 
   return node;
 });
