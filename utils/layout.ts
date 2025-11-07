@@ -120,16 +120,27 @@ export const getLayoutedElements = (
     dagreGraph.setEdge(edge.source, edge.target);
   });
 
-  dagre.layout(dagreGraph);
+ dagre.layout(dagreGraph);
 
-  const layoutedNodes = nodes.map((node) => {
-    const nodeWithPosition = dagreGraph.node(node.id);
-    node.position = {
-      x: nodeWithPosition.x - nodeWidth / 2,
-      y: nodeWithPosition.y - nodeHeight / 2,
-    };
-    return node;
-  });
+// 🔧 Desplazamiento adicional manual (solo después del layout)
+const layoutedNodes = nodes.map((node) => {
+  const nodeWithPosition = dagreGraph.node(node.id);
+  node.position = {
+    x: nodeWithPosition.x - nodeWidth / 2,
+    y: nodeWithPosition.y - nodeHeight / 2,
+  };
 
-  return { nodes: layoutedNodes, edges };
+  // 🟨 Ajuste visual extra solo para los tres nodos finales
+  if (node.id === "capellanes") {
+    node.position.x += 200; // mueve Capellanes hacia la derecha
+  }
+  if (node.id === "tic") {
+    node.position.x += 400; // mueve Nicolás Torres más a la derecha
+  }
+
+  return node;
+});
+
+return { nodes: layoutedNodes, edges };
+
 };

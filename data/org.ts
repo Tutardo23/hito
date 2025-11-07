@@ -161,6 +161,21 @@ export const orgData = {
                 { id: "sec_8_36", nombre: "Corvalán Claudio", cargo: "Pec - Profesor Fe y Vida", tipo: "Titular", horas: 34.0 },
               ],
             },
+            {
+  id: "tutores",
+  etiqueta: "Equipo de Tutores (Secundaria)",
+  persona: {
+    id: "tutores",
+    nombre: "Equipo de Tutores",
+    cargo: "Tutorías y acompañamiento",
+    tipo: "Titular",
+    horas: 0,
+  },
+  listaPersonas: [
+    // Por ahora vacío, cuando tengas nombres los agregamos
+  ],
+}
+
           ],
         },
         
@@ -240,11 +255,11 @@ export const orgData = {
                 horas: 0,
               },
               listaPersonas: [
-                { id: "p1", nombre: "Agostina Garcia Castro", cargo: "Comunicación y Promoción POLO", tipo: "Titular", horas: 20 },
-                { id: "p2", nombre: "Felicitas del Frari", cargo: "Postulaciones, Administración y Recepción POLO", tipo: "Titular", horas: 34 },
+                
+                
                 { id: "p7", nombre: "Lucia Beverina", cargo: "Recepción Pucará tarde y taller de Inglés", tipo: "Titular", horas: 16 },
-                { id: "p8", nombre: "Maria Eugenia Martin", cargo: "Recepción Pucará mañana, Área Familia, Consejos de Dirección", tipo: "Titular", horas: 34 },
-                { id: "p14", nombre: "Nicolás Torres", cargo: "TIC - Plataforma Colegium", tipo: "Titular", horas: 34 },
+                
+                
               ],
             },
             {
@@ -284,6 +299,152 @@ export const orgData = {
             },
           ],
         },
+        {
+  id: "admin-polo",
+  etiqueta: "Administración del Polo",
+  persona: {
+    id: "admin-polo",
+    nombre: "Administración del Polo",
+    cargo: "Equipo de gestión administrativa y soporte del Polo",
+    tipo: "Titular",
+    horas: 0,
+  },
+  children: [
+    // === ÁREA FAMILIA / COMUNICACIÓN / POSTULACIONES ===
+    {
+      id: "polo-familia-comunicacion",
+      etiqueta: "Área Familia, Comunicación y Postulaciones",
+      persona: {
+        id: "polo-familia-comunicacion",
+        nombre: "Área Familia, Comunicación y Postulaciones",
+        cargo: "Equipo de gestión institucional del Polo",
+        tipo: "Titular",
+        horas: 0,
+      },
+      listaPersonas: [
+        { id: "p1", nombre: "Maria Marta Rojas", cargo: "Área Familia (Polo)", tipo: "Titular", horas: 31 },
+        { id: "p2", nombre: "Agostina Garcia Castro", cargo: "Comunicación y Promoción POLO", tipo: "Titular", horas: 20 },
+        { id: "p3", nombre: "Felicitas del Frari", cargo: "Postulaciones, Administración y Recepción POLO", tipo: "Titular", horas: 34 },
+      ],
+    },
+
+    // === ADMINISTRACIÓN Y CONTABILIDAD ===
+    {
+      id: "polo-administracion",
+      etiqueta: "Administración y Contabilidad",
+      persona: {
+        id: "polo-administracion",
+        nombre: "Administración y Contabilidad",
+        cargo: "Gestión administrativa, contable y financiera",
+        tipo: "Titular",
+        horas: 0,
+      },
+      listaPersonas: [
+        { id: "p4", nombre: "Cristina Navarro Zaldarriaga", cargo: "Administración (Polo)", tipo: "Titular", horas: 34 },
+        { id: "p5", nombre: "Cristina Zottoli Z.", cargo: "Contabilidad y Tesorería", tipo: "Titular", horas: 25 },
+      ],
+      children: [
+        {
+          id: "polo-facturacion",
+          etiqueta: "Facturación y Cobranzas",
+          persona: {
+            id: "polo-facturacion",
+            nombre: "Equipo de Facturación y Tesorería",
+            cargo: "Gestión de cobranzas y administración contable",
+            tipo: "Titular",
+            horas: 0,
+          },
+          listaPersonas: [
+            { id: "p6", nombre: "Virginia Melhen", cargo: "Facturación y Tesorería", tipo: "Titular", horas: 34 },
+            { id: "p7", nombre: "Mercedes García Posse", cargo: "Facturación y Cobranzas", tipo: "Titular", horas: 34 },
+            { id: "p8", nombre: "Victoria Morano", cargo: "Facturación (Tercerizada)", tipo: "Tercerizada", horas: 8 },
+          ],
+        },
+      ],
+    },
+
+    // === RECURSOS HUMANOS ===
+    {
+      id: "polo-rrhh",
+      etiqueta: "Recursos Humanos",
+      persona: {
+        id: "polo-rrhh",
+        nombre: "Recursos Humanos",
+        cargo: "Gestión del personal y asesoría",
+        tipo: "Titular",
+        horas: 0,
+      },
+      listaPersonas: [
+        { id: "p9", nombre: "Dolores Kaese", cargo: "RRHH", tipo: "Titular", horas: 34 },
+        { id: "p10", nombre: "Guillermina Conti", cargo: "RRHH", tipo: "Titular", horas: 34 },
+        { id: "p11", nombre: "Belén Manes", cargo: "RRHH (Tercerizada)", tipo: "Tercerizada", horas: 20 },
+      ],
+    },
+
+    // === MANTENIMIENTO Y SERVICIOS ===
+    {
+      id: "polo-mantenimiento",
+      etiqueta: "Mantenimiento, Operaciones y Servicios Generales",
+      persona: {
+        id: "polo-mantenimiento",
+        nombre: "Mantenimiento y Servicios Generales",
+        cargo: "Soporte técnico y edilicio",
+        tipo: "Titular",
+        horas: 0,
+      },
+      listaPersonas: [
+        { id: "p12", nombre: "Juan Pablo Varela", cargo: "Mantenimiento, Operaciones y Servicios Generales", tipo: "Titular", horas: 34 },
+      ],
+    },
+
+    // === ASESORÍA LEGAL ===
+    {
+      id: "polo-legal",
+      etiqueta: "Asesoría Legal",
+      persona: {
+        id: "polo-legal",
+        nombre: "Asesoría Legal",
+        cargo: "Asesoramiento Jurídico del Polo",
+        tipo: "Tercerizada",
+        horas: 15,
+      },
+      listaPersonas: [
+        { id: "p13", nombre: "Clara García Castellanos", cargo: "Asesoría Legal (Tercerizada)", tipo: "Tercerizada", horas: 15 },
+      ],
+    },
+  ],
+},
+
+       {
+  id: "capellanes",
+  etiqueta: "Capellanes",
+  persona: {
+    id: "capellanes",
+    nombre: "Equipo de Capellanes",
+    cargo: "Formación espiritual y acompañamiento",
+    tipo: "Titular",
+    horas: 0,
+  },
+  listaPersonas: [
+    { id: "cap1", nombre: "Jesús Galindo Bustos", cargo: "Capellán del Polo", tipo: "Titular", horas: 0 },
+    { id: "cap2", nombre: "Andrej Rant", cargo: "Capellán del Polo", tipo: "Titular", horas: 0 },
+  ],
+},
+
+{
+  id: "tic",
+  etiqueta: "TIC - Plataforma Colegium",
+  persona: {
+    id: "p14",
+    nombre: "Nicolás Torres",
+    cargo: "TIC - Plataforma Colegium",
+    tipo: "Titular",
+    horas: 34,
+  },
+  listaPersonas: [],
+}
+
+
       ],
     },
   ],
