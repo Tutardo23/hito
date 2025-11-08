@@ -454,11 +454,11 @@ export const orgData = {
         },
        {
   id: "mantenimiento",
-  etiqueta: "Mantenimiento, Op. y Ss.",
+  etiqueta: "Mantenimiento, Operaciones y Servicios Generales",
   persona: {
     id: "mantenimiento",
-    nombre: "Equipo de Mantenimiento, Op. y Ss.",
-    cargo: "Mantenimiento, Operaciones y Servicios Generales",
+    nombre: "Equipo de Mantenimiento y Servicios Generales",
+    cargo: "Soporte técnico y operativo del colegio",
     tipo: "Titular",
     horas: 0,
   },
@@ -475,10 +475,11 @@ export const orgData = {
       nombre: "César Maximiliano Lencina",
       cargo: "Mantenimiento, Operaciones y Servicios Generales",
       tipo: "Titular",
-      horas: null, // actualizar cuando tengas el dato
+      horas: 46.5, // igual que en limpieza, para mantener coherencia
     },
   ],
 },
+
 
        {
   id: "limpieza",
