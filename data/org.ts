@@ -457,8 +457,8 @@ export const orgData = {
   etiqueta: "Mantenimiento, Operaciones y Servicios Generales",
   persona: {
     id: "mantenimiento",
-    nombre: "Equipo de Mantenimiento y Servicios Generales",
-    cargo: "Soporte técnico y operativo del colegio",
+    nombre: "Equipo de Mantenimiento, Op. y Ss.",
+    cargo: "Mantenimiento, Operaciones y Servicios Generales",
     tipo: "Titular",
     horas: 0,
   },
