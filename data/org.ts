@@ -392,21 +392,7 @@ export const orgData = {
 
 
     // --- CONTABILIDAD Y TESORERÍA ---
-    {
-      id: "contabilidad",
-      etiqueta: "Contabilidad y Tesorería",
-      persona: {
-        id: "contabilidad",
-        nombre: "Equipo de Contabilidad y Tesorería",
-        cargo: "Gestión contable y financiera",
-        tipo: "Titular",
-        horas: 0,
-      },
-      listaPersonas: [
-        { id: "cristina-zottoli", nombre: "Cristina Zottoli Z.", cargo: "Contabilidad y Tesorería", tipo: "Titular", horas: 25 },
-        { id: "virginia-melhen", nombre: "Virginia Melhen", cargo: "Facturación y Tesorería", tipo: "Titular", horas: 34 },
-      ],
-    },
+   
 
     // --- ADMINISTRACIÓN (CON SUBNIVELES) ---
     {
@@ -436,6 +422,21 @@ export const orgData = {
             { id: "victoria-m", nombre: "Victoria Morano", cargo: "Facturación (Tercerizada)", tipo: "Tercerizada", horas: 8 },
           ],
         },
+        {
+      id: "contabilidad",
+      etiqueta: "Contabilidad y Tesorería",
+      persona: {
+        id: "contabilidad",
+        nombre: "Equipo de Contabilidad y Tesorería",
+        cargo: "Gestión contable y financiera",
+        tipo: "Titular",
+        horas: 0,
+      },
+      listaPersonas: [
+        { id: "cristina-zottoli", nombre: "Cristina Zottoli Z.", cargo: "Contabilidad y Tesorería", tipo: "Titular", horas: 25 },
+        { id: "virginia-melhen", nombre: "Virginia Melhen", cargo: "Facturación y Tesorería", tipo: "Titular", horas: 34 },
+      ],
+    },
         {
           id: "rrhh",
           etiqueta: "Recursos Humanos",
