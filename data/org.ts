@@ -452,17 +452,34 @@ export const orgData = {
             { id: "guillermina-c", nombre: "Guillermina Conti", cargo: "RRHH", tipo: "Titular", horas: 34 },
           ],
         },
-        {
-          id: "mantenimiento",
-          etiqueta: "Mantenimiento, Operaciones y Servicios Generales",
-          persona: {
-            id: "mantenimiento",
-            nombre: "Juan Pablo Varela",
-            cargo: "Mantenimiento, Operaciones y Servicios Generales",
-            tipo: "Titular",
-            horas: 34,
-          },
-        },
+       {
+  id: "mantenimiento",
+  etiqueta: "Mantenimiento, Op. y Ss.",
+  persona: {
+    id: "mantenimiento",
+    nombre: "Equipo de Mantenimiento, Op. y Ss.",
+    cargo: "Mantenimiento, Operaciones y Servicios Generales",
+    tipo: "Titular",
+    horas: 0,
+  },
+  listaPersonas: [
+    {
+      id: "varela-juan-pablo",
+      nombre: "Juan Pablo Varela",
+      cargo: "Mantenimiento, Operaciones y Servicios Generales",
+      tipo: "Titular",
+      horas: 34,
+    },
+    {
+      id: "lencina-maximiliano",
+      nombre: "César Maximiliano Lencina",
+      cargo: "Mantenimiento, Operaciones y Servicios Generales",
+      tipo: "Titular",
+      horas: null, // actualizar cuando tengas el dato
+    },
+  ],
+},
+
        {
   id: "limpieza",
   etiqueta: "Personal de Limpieza y Conserjes",
